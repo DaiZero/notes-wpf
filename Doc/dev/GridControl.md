@@ -1,3 +1,3 @@
 # 显示列号
 
-![avatar](Img/dev/gridcontrol_showcolumindex.png)
+![showrowindex](https://github.com/DaiZero/notes-wpf/blob/master/Img/dev/gridcontrol_showcolumindex.png)
