@@ -1,4 +1,4 @@
-# 显示列号
+## 显示列号
 
 ![showrowindex](/Img/dev/gridcontrol_showcolumindex.png)
 
@@ -40,7 +40,9 @@ xmlns:cvt="clr-namespace:Converters"
         <cvt:RowHandleToRowNumberConverter x:Key="RowHandleConverter"/>
         <DataTemplate x:Key="rowIndicatorContentTemplate">
             <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <TextBlock Text="{Binding Path=RowHandle.Value,Converter={StaticResource RowHandleConverter}}" TextAlignment="Right" Margin="0,0,10,0"/>
+                <TextBlock 
+                Text="{Binding Path=RowHandle.Value,Converter={StaticResource RowHandleConverter}}" TextAlignment="Right" 
+                Margin="0,0,10,0"/>
             </StackPanel>
         </DataTemplate>
     </ResourceDictionary>
@@ -48,7 +50,9 @@ xmlns:cvt="clr-namespace:Converters"
 <!--方法2.1:TableView中的Indicator属性相关设置-->
 <dxg:GridControl>
     <dxg:GridControl.View>
-        <dxg:TableView  ShowIndicator="true" IndicatorWidth="40" RowIndicatorContentTemplate="{StaticResource rowIndicatorContentTemplate}"/>
+        <dxg:TableView  ShowIndicator="true" 
+        IndicatorWidth="40" 
+        RowIndicatorContentTemplate="{StaticResource rowIndicatorContentTemplate}"/>
     </dxg:GridControl.View>
 </dxg:GridControl >
     
@@ -56,9 +60,58 @@ xmlns:cvt="clr-namespace:Converters"
 <dxg:GridColumn Width="40">
     <dxg:GridColumn.CellTemplate>
         <DataTemplate>
-            <TextBlock Width="40" Text="{Binding Path = RowData.RowHandle.Value, Converter={StaticResource RowHandleConverter}}" 
+            <TextBlock Width="40" 
+            Text="{Binding Path = RowData.RowHandle.Value, Converter={StaticResource RowHandleConverter}}" 
                 HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
         </DataTemplate>
     </dxg:GridColumn.CellTemplate>
 </dxg:GridColumn>
 ```
+
+## 列表（时间类型）的格式化显示
+
+1. **用EditSettings来实现**
+```xml
+<!--方式1-->
+<dxg:GridColumn Header="时间" FieldName="ExDate">
+      <dxg:GridColumn.EditSettings>
+           <dxe:TextEditSettings Mask="yyyy-MM-dd" MaskType="DateTime" MaskUseAsDisplayFormat="True"/>
+      </dxg:GridColumn.EditSettings>
+</dxg:GridColumn>
+<!--方式2-->
+<dxg:GridColumn Header="时间" FieldName="ExDate">
+    <dxg:GridColumn.EditSettings>
+        <dxe:TextEditSettings DisplayFormat="yyyy-MM-dd"/>
+    </dxg:GridColumn.EditSettings>
+</dxg:GridColumn>
+```
+
+2. **用DataTemplate来实现**
+
+```xml
+<dxg:GridColumn Header="时间" FieldName="ExDate">
+    <dxg:GridColumn.CellTemplate>
+        <DataTemplate>
+          <dxe:TextEdit Name="PART_Editor" DisplayFormatString="yyyy-MM-dd"/>
+        </DataTemplate>
+    </dxg:GridColumn.CellTemplate>
+</dxg:GridColumn>
+```
+
+## 单选行数据的获取
+
+>FocusedRow已经弃用，在Master Detail 下的Detail里的数据行用 TableView的FocusedRow取不到当前所选行数据，使用GridControl 下的CurrentItem或SelectedItem可取到。
+
+## MasterDetail内容自动全部展开
+
+ ```csharp
+ private void FrameworkElement_OnLoaded(object sender, RoutedEventArgs e)
+{
+   var gctrl = (GridControl) sender;
+   for (int i = 0; i < gctrl.VisibleRowCount; i++)
+   {
+      gctrl.ExpandMasterRow(gctrl.GetRowHandleByListIndex(i));
+   }
+ }
+ ```
+
