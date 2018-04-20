@@ -1,5 +1,4 @@
-## 显示列号
-
+实现效果:
 ![showrowindex](/Img/dev/gridcontrol_showcolumindex.png)
 
 方法1 代码(CodeBehind)：
@@ -67,51 +66,3 @@ xmlns:cvt="clr-namespace:Converters"
     </dxg:GridColumn.CellTemplate>
 </dxg:GridColumn>
 ```
-
-## 列表（时间类型）的格式化显示
-
-1. **用EditSettings来实现**
-```xml
-<!--方式1-->
-<dxg:GridColumn Header="时间" FieldName="ExDate">
-      <dxg:GridColumn.EditSettings>
-           <dxe:TextEditSettings Mask="yyyy-MM-dd" MaskType="DateTime" MaskUseAsDisplayFormat="True"/>
-      </dxg:GridColumn.EditSettings>
-</dxg:GridColumn>
-<!--方式2-->
-<dxg:GridColumn Header="时间" FieldName="ExDate">
-    <dxg:GridColumn.EditSettings>
-        <dxe:TextEditSettings DisplayFormat="yyyy-MM-dd"/>
-    </dxg:GridColumn.EditSettings>
-</dxg:GridColumn>
-```
-
-2. **用DataTemplate来实现**
-
-```xml
-<dxg:GridColumn Header="时间" FieldName="ExDate">
-    <dxg:GridColumn.CellTemplate>
-        <DataTemplate>
-          <dxe:TextEdit Name="PART_Editor" DisplayFormatString="yyyy-MM-dd"/>
-        </DataTemplate>
-    </dxg:GridColumn.CellTemplate>
-</dxg:GridColumn>
-```
-
-## 单选行数据的获取
-
->FocusedRow已经弃用，在Master Detail 下的Detail里的数据行用 TableView的FocusedRow取不到当前所选行数据，使用GridControl 下的CurrentItem或SelectedItem可取到。
-
-## MasterDetail内容自动全部展开
-
- ```csharp
- private void FrameworkElement_OnLoaded(object sender, RoutedEventArgs e)
-{
-   var gctrl = (GridControl) sender;
-   for (int i = 0; i < gctrl.VisibleRowCount; i++)
-   {
-      gctrl.ExpandMasterRow(gctrl.GetRowHandleByListIndex(i));
-   }
- }
- ```
-

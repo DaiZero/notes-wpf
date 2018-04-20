@@ -1,6 +1,6 @@
 ## WPF-DevExpress
-- [GridControl](GridControl.md)
-- [TreeListControl](TreeListControl.md)
-- [TextEdit](TextEdit.md)
-- [ComboBoxEdit](ComboBoxEdit.md)
-- [DXTabControl](DXTabControl.md)
+- [GridControl](GridControl/README.md)
+- [TreeListControl](TreeListControl/README.md)
+- [TextEdit](TextEdit/README.md)
+- [ComboBoxEdit](ComboBoxEdit/README.md)
+- [DXTabControl](DXTabControl/README.md)
