@@ -31,4 +31,4 @@ public class NumberToVisibilityConverter : IValueConverter
 </UserControl.Resources>
 ```
 3. **参考文档**
-https://www.devexpress.com/Support/Center/Example/Details/E4237/how-to-hide-the-expand-button-in-master-detail-grid-if-a-row-has-no-detail-data
+  - https://www.devexpress.com/Support/Center/Example/Details/E4237/how-to-hide-the-expand-button-in-master-detail-grid-if-a-row-has-no-detail-data
