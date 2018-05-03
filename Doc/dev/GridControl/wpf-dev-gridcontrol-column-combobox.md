@@ -11,7 +11,7 @@
 2. **不可下拉只读模式**
 
 ```xml
-<dxg:GridColumn  FieldName="Type" Header="Type"  ReadOnly="False">
+<dxg:GridColumn  FieldName="Type" Header="Type"  ReadOnly="True">
     <dxg:GridColumn.EditSettings>
         <dxe:ComboBoxEditSettings ItemsSource="{Binding TypeList}" DisplayMember="Name" ValueMember="Value" AllowDefaultButton="False"/>
     </dxg:GridColumn.EditSettings>
